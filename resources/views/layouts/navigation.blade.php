@@ -19,7 +19,19 @@
                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'dokter')
                     <x-nav-link :href="route('userlist')" :active="request()->routeIs('userlist')">
                         {{ __('User List') }}
-                    </x-nav-link> 
+                    </x-nav-link>
+                    @endif
+
+                    @if (Auth::user()->role == 'admin')
+                    <x-nav-link :href="route('medicinelist')" :active="request()->routeIs('medicinelist')">
+                        {{ __('Medicine List') }}
+                    </x-nav-link>
+                    @endif
+
+                    @if (Auth::user()->role == 'dokter' || Auth::user()->role == 'pasien')
+                    <x-nav-link :href="route('medicalrecord')" :active="request()->routeIs('medicalrecord')">
+                        {{ __('Medical record') }}
+                    </x-nav-link>
                     @endif
                 </div>
 
@@ -77,6 +89,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'dokter')
+            <x-responsive-nav-link :href="route('userlist')" :active="request()->routeIs('userlist')">
+                {{ __('User List') }}
+            </x-responsive-nav-link> 
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

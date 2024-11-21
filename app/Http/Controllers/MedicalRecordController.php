@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
-class UserListController extends Controller
+class MedicalRecordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +13,10 @@ class UserListController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            if (Auth::user()->role == 'admin') {
-                return view('dashboard.admin.user-list');
+            if (Auth::user()->role == 'pasien') {
+                return view('dashboard.pasien.medical-record');
             } elseif (Auth::user()->role == 'dokter') {
-                return view('dashboard.dokter.user-list');
+                return view('dashboard.dokter.medical-record');
             } else {
                 return redirect('login');
             }
