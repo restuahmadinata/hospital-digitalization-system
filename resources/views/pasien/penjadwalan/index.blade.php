@@ -35,14 +35,16 @@
                                 @foreach ($penjadwalan as $jadwal)
                                     <tr>
                                         <td class="border px-4 py-2">{{ $jadwal->dokter->name }}</td>
-                                        <td class="border px-4 py-2">{{ $jadwal->tanggal_konsultasi }}</td>
+                                        <td class="border px-4 py-2">{{ \Carbon\Carbon::parse($jadwal->tanggal_konsultasi)->translatedFormat('d F Y') }}</td>
                                         <td class="border px-4 py-2">{{ $jadwal->konfirmasi }}</td>
                                         <td class="border px-4 py-2">
-                                            <form action="{{ route('penjadwalan.destroy', $jadwal->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg">Batalkan</button>
-                                            </form>
+                                            @if ($jadwal->konfirmasi == 'tidak')
+                                                <form action="{{ route('penjadwalan.destroy', $jadwal->id) }}" method="POST" class="inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-lg">Batalkan</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

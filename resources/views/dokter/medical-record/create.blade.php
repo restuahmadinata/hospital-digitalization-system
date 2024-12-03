@@ -116,6 +116,13 @@
                     }
                 });
             });
+
+            // Hide add button if all options are selected
+            if (selectedObatIds.length >= availableObats.length) {
+                addObatButton.style.display = 'none';
+            } else {
+                addObatButton.style.display = 'inline-block';
+            }
         }
 
         function validateJumlahObat() {

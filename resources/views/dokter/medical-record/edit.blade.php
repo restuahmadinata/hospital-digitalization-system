@@ -1,4 +1,4 @@
-{{-- File: resources/views/medical-records/edit-record.blade.php --}}
+{{-- File: resources/views/medical-records/edit.blade.php --}}
 
 <x-app-layout>
     <x-slot name="header">
@@ -32,8 +32,9 @@
                             <div>
                                 <label for="pasien_id" class="block text-sm font-medium text-gray-700">Pasien</label>
                                 <select name="pasien_id" id="pasien_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                    <option value="" disabled selected>Pilih Pasien</option>
                                     @foreach ($pasiens as $pasien)
-                                        <option value="{{ $pasien->id }}" {{ $record->pasien_id == $pasien->id ? 'selected' : '' }}>{{ $pasien->name }}</option>
+                                        <option value="{{ $pasien->id }}" {{ old('pasien_id', $record->pasien_id) == $pasien->id ? 'selected' : '' }}>{{ $pasien->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -42,8 +43,9 @@
                             <div>
                                 <label for="dokter_id" class="block text-sm font-medium text-gray-700">Dokter</label>
                                 <select name="dokter_id" id="dokter_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                    <option value="" disabled selected>Pilih Dokter</option>
                                     @foreach ($dokters as $dokter)
-                                        <option value="{{ $dokter->id }}" {{ $record->dokter_id == $dokter->id ? 'selected' : '' }}>{{ $dokter->name }}</option>
+                                        <option value="{{ $dokter->id }}" {{ old('dokter_id', $record->dokter_id) == $dokter->id ? 'selected' : '' }}>{{ $dokter->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -65,7 +67,6 @@
                                 <label for="tanggal_berobat" class="block text-sm font-medium text-gray-700">Tanggal Berobat</label>
                                 <input type="date" name="tanggal_berobat" id="tanggal_berobat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ old('tanggal_berobat', $record->tanggal_berobat->format('Y-m-d')) }}" required>
                             </div>
-
 
                             <!-- Obat -->
                             <div id="obat-container" class="col-span-2">
@@ -118,6 +119,13 @@
                     }
                 });
             });
+
+            // Hide add button if all options are selected
+            if (selectedObatIds.length >= availableObats.length) {
+                addObatButton.style.display = 'none';
+            } else {
+                addObatButton.style.display = 'inline-block';
+            }
         }
 
         function validateJumlahObat() {

@@ -36,6 +36,10 @@
                             <label for="filter-date" class="block text-sm font-medium text-gray-700">Filter Tanggal Registrasi</label>
                             <input type="date" id="filter-date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ request('date') }}">
                         </div>
+                        <div>
+                            <label for="search" class="block text-sm font-medium text-gray-700">Cari</label>
+                            <input type="text" id="search" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" value="{{ request('search') }}" placeholder="Cari nama atau email">
+                        </div>
                     </div>
 
                     <div class="rounded-lg border border-gray-200">
@@ -94,7 +98,7 @@
                 <form id="delete-form-modal" action="#" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500" onclick="confirmDeletionModal()">Hapus</button>
+                    <button type="button" id="delete-button" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-500" onclick="confirmDeletionModal()">Hapus</button>
                 </form>
                 <button onclick="closeModal('user-modal')" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500">Tutup</button>
             </div>
@@ -113,13 +117,16 @@
 
         const filterRole = document.getElementById('filter-role');
         const filterDate = document.getElementById('filter-date');
+        const searchInput = document.getElementById('search');
 
         filterRole.addEventListener('change', applyFilters);
         filterDate.addEventListener('change', applyFilters);
+        searchInput.addEventListener('input', applyFilters);
 
         function applyFilters() {
             const role = filterRole.value;
             const date = filterDate.value;
+            const search = searchInput.value;
             const url = new URL(window.location.href);
             if (role) {
                 url.searchParams.set('role', role);
@@ -131,6 +138,11 @@
             } else {
                 url.searchParams.delete('date');
             }
+            if (search) {
+                url.searchParams.set('search', search);
+            } else {
+                url.searchParams.delete('search');
+            }
             url.searchParams.delete('page'); // Reset page to 1
             window.location.href = url.toString();
         }
@@ -139,6 +151,7 @@
     function showUserModal(user) {
         const userDetails = document.getElementById('user-details');
         const userFoto = document.getElementById('user-foto');
+        const deleteButton = document.getElementById('delete-button');
 
         userDetails.innerHTML = `
             <p><strong>Nama:</strong> ${user.name}</p>
@@ -151,9 +164,15 @@
 
         userFoto.src = `{{ asset('${user.foto}') }}`;
 
-        
         document.getElementById('user-edit').href = `{{ route('user.edit', ':id') }}`.replace(':id', user.id);
         document.getElementById('delete-form-modal').action = `{{ url('user/${user.id}') }}`;
+
+        // Hide delete button if user is admin with id 1
+        if (user.id === 1) {
+            deleteButton.style.display = 'none';
+        } else {
+            deleteButton.style.display = 'inline-block';
+        }
 
         window.dispatchEvent(new CustomEvent('open-modal', { detail: 'user-modal' }));
     }

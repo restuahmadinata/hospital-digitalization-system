@@ -91,7 +91,7 @@
                             <!-- Jenis Dokter -->
                             <div id="jenis-dokter-container" class="hidden">
                                 <label for="jenis_dokter" class="block text-sm font-medium text-gray-700">Jenis Dokter</label>
-                                <select name="jenis_dokter" id="jenis_dokter" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                <select name="jenis_dokter" id="jenis_dokter" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     <option value="" disabled selected>Pilih Jenis Dokter</option>
                                     <option value="umum" {{ old('jenis_dokter') == 'umum' ? 'selected' : '' }}>Umum</option>
                                     <option value="spesialis" {{ old('jenis_dokter') == 'spesialis' ? 'selected' : '' }}>Spesialis</option>
@@ -104,7 +104,7 @@
                             <!-- Spesialisasi Dokter -->
                             <div id="spesialisasi-container" class="hidden">
                                 <label for="spesialisasi" class="block text-sm font-medium text-gray-700">Spesialisasi</label>
-                                <select name="spesialisasi" id="spesialisasi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                <select name="spesialisasi" id="spesialisasi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     <option value="" disabled selected>Pilih Spesialisasi</option>
                                     <option value="Interna (Internis)" {{ old('spesialisasi') == 'Interna (Internis)' ? 'selected' : '' }}>Interna (Internis)</option>
                                     <option value="Pediatri (Pediatrisian)" {{ old('spesialisasi') == 'Pediatri (Pediatrisian)' ? 'selected' : '' }}>Pediatri (Pediatrisian)</option>
@@ -185,6 +185,7 @@
         const spesialisasiContainer = document.getElementById('spesialisasi-container');
         const hariTugasContainer = document.getElementById('hari-tugas-container');
         const jenisDokterSelect = document.getElementById('jenis_dokter');
+        const spesialisasiSelect = document.getElementById('spesialisasi');
 
         roleSelect.addEventListener('change', function() {
             if (this.value === 'dokter') {
@@ -194,15 +195,22 @@
                 jenisDokterContainer.classList.add('hidden');
                 spesialisasiContainer.classList.add('hidden');
                 hariTugasContainer.classList.add('hidden');
+                // Reset selects when hiding
+                jenisDokterSelect.value = '';
+                spesialisasiSelect.value = '';
             }
         });
 
         jenisDokterSelect.addEventListener('change', function() {
             if (this.value === 'spesialis') {
                 spesialisasiContainer.classList.remove('hidden');
+                // Make spesialisasi required when dokter is spesialis
+                spesialisasiSelect.setAttribute('required', 'required');
             } else {
                 spesialisasiContainer.classList.add('hidden');
-                document.getElementById('spesialisasi').value = ''; // Clear spesialisasi input
+                spesialisasiSelect.value = ''; // Clear spesialisasi input
+                // Remove required when dokter is umum
+                spesialisasiSelect.removeAttribute('required');
             }
         });
 

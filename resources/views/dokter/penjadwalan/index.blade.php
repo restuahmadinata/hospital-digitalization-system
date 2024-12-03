@@ -31,7 +31,7 @@
                                 @foreach ($penjadwalan as $jadwal)
                                     <tr>
                                         <td class="border px-4 py-2">{{ $jadwal->pasien->name }}</td>
-                                        <td class="border px-4 py-2">{{ $jadwal->tanggal_konsultasi }}</td>
+                                        <td class="border px-4 py-2">{{ \Carbon\Carbon::parse($jadwal->tanggal_konsultasi)->translatedFormat('d F Y') }}</td>
                                         <td class="border px-4 py-2">{{ $jadwal->konfirmasi }}</td>
                                         <td class="border px-4 py-2">
                                             @if ($jadwal->konfirmasi == 'tidak')
