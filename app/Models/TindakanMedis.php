@@ -9,7 +9,13 @@ class TindakanMedis extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['pasien_id', 'dokter_id', 'deskripsi', 'tanggal', 'notifikasi'];
+    protected $fillable = [
+        'pasien_id',
+        'dokter_id',
+        'deskripsi',
+        'tanggal',
+        'notifikasi'
+    ];
 
     public function pasien()
     {

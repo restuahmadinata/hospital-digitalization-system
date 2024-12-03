@@ -18,10 +18,22 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
 
-    protected $fillable = [
-        'name', 'username', 'email', 'password', 'role', 'tanggal_lahir', 'jenis_kelamin',
+     protected $fillable = [
+        'name',
+        'username',
+        'email',
+        'password',
+        'role',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'foto', // Tambahkan kolom foto
     ];
 
+    // Relasi ke model Dokter
+    public function dokter()
+    {
+        return $this->hasOne(Dokter::class, 'dokter_id');
+    }
     /**
      * Relasi untuk mendapatkan feedback yang diberikan oleh pasien (untuk dokter)
      */
@@ -103,6 +115,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(TindakanMedis::class, 'dokter_id');
     }
+
+    
 
     /**
      * The attributes that should be hidden for serialization.

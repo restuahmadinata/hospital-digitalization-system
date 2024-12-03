@@ -13,7 +13,7 @@ class Feedback extends Model
         'dokter_id',
         'pasien_id',
         'rating',
-        'komentar',
+        'ulasan',
     ];
 
     /**

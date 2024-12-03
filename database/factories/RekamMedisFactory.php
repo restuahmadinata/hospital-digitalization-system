@@ -17,7 +17,8 @@ class RekamMedisFactory extends Factory
             'pasien_id' => User::where('role', 'pasien')->inRandomOrder()->first()->id,
             'dokter_id' => User::where('role', 'dokter')->inRandomOrder()->first()->id,
             'tindakan' => $this->faker->sentence(),
-            'tanggal_berobat' => $this->faker->date(),
+            'tanggal_berobat' => $this->faker->dateTimeBetween('-1 years', 'now'),
+            'penyakit' => $this->faker->sentence(),
         ];
     }
 
@@ -25,7 +26,9 @@ class RekamMedisFactory extends Factory
     {
         return $this->afterCreating(function (RekamMedis $rekamMedis) use ($count) {
             $obatIds = Obat::inRandomOrder()->limit($count)->pluck('id');
-            $rekamMedis->obat()->attach($obatIds);
+            foreach ($obatIds as $obatId) {
+                $rekamMedis->obats()->attach($obatId, ['jumlah' => rand(1, 5)]); // Tambahkan kolom jumlah
+            }
         });
     }
 }

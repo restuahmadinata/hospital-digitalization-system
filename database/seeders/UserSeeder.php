@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'role' => 'admin',
             'tanggal_lahir' => '1990-01-01',
             'jenis_kelamin' => 'pria',
+            'foto' => 'images/users/user-placeholder.png', // Tambahkan kolom foto
             'email_verified_at' => now(),
         ]);
 
@@ -35,6 +36,7 @@ class UserSeeder extends Seeder
             'role' => 'dokter',
             'tanggal_lahir' => '1985-05-12',
             'jenis_kelamin' => 'pria',
+            'foto' => 'images/users/user_placeholder.png', // Tambahkan kolom foto
             'email_verified_at' => now(),
         ]);
 
@@ -47,6 +49,7 @@ class UserSeeder extends Seeder
             'role' => 'pasien',
             'tanggal_lahir' => '1995-02-14',
             'jenis_kelamin' => 'wanita',
+            'foto' => 'images/users/user_placeholder.png', // Tambahkan kolom foto
             'email_verified_at' => now(),
         ]);
     }

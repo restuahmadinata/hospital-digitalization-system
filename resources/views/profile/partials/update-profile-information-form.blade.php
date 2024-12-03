@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('Informasi Anda') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Di sini anda bisa mengubah informasi profil dan alamat email") }}
         </p>
     </header>
 
@@ -13,12 +13,22 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
+        <div class="flex items-center gap-4">
+            <div class="relative">
+                <img id="profile-foto" src="{{ asset($user->foto) }}" alt="Foto Profil" class="w-36 h-36 object-cover rounded-full">
+                <label for="foto" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm font-medium rounded-full opacity-0 hover:opacity-100 cursor-pointer">
+                    {{ __('Ganti Foto') }}
+                </label>
+                <input type="file" name="foto" id="foto" class="hidden" onchange="previewImage(event)">
+            </div>
+        </div>
+
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nama')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
@@ -48,7 +58,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Simpan') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -62,3 +72,15 @@
         </div>
     </form>
 </section>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const reader = new FileReader();
+        reader.onload = function() {
+            const preview = document.getElementById('profile-foto');
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>

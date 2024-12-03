@@ -21,7 +21,7 @@ class ObatFactory extends Factory
             'deskripsi' => $this->faker->sentence,
             'tipe_obat' => $this->faker->randomElement(['keras', 'biasa']),
             'stok' => $this->faker->numberBetween(10, 200),
-            'gambar_obat' => null,
+            'gambar_obat' => 'images/gambar_obat_placeholder.jpg',
             'kedaluwarsa' => $tanggalKedaluwarsa->format('Y-m-d'),
             'status_kedaluwarsa' => $statusKedaluwarsa,
         ];

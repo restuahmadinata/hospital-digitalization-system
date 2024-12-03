@@ -5,6 +5,12 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <x-slot name="header">
+            <h2 class="font-semibold text-5xl text-green-700 leading-tight text-center">
+                {{ __('MASUK') }}
+            </h2>
+        </x-slot>
+
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

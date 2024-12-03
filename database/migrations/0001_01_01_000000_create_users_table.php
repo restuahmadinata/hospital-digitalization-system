@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('role', ['admin', 'pasien', 'dokter'])->default('pasien');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['pria', 'wanita']);
+            $table->string('foto')->default('images/user_placeholder.png'); // Tambahkan kolom foto
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,6 +25,7 @@ class UserFactory extends Factory
             'role' => $this->faker->randomElement(['dokter', 'pasien']),
             'tanggal_lahir' => $this->faker->date(),
             'jenis_kelamin' => $this->faker->randomElement(['pria', 'wanita']),
+            'foto' => 'images/users/user_placeholder.png', // Tambahkan kolom foto
         ];
     }
 

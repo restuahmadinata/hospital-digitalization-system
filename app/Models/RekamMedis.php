@@ -12,32 +12,32 @@ class RekamMedis extends Model
     protected $fillable = [
         'pasien_id',
         'dokter_id',
-        'obat_id',
+        'penyakit',
         'tindakan',
         'tanggal_berobat',
     ];
 
-    /**
-     * Relasi dengan model Pasien (users yang memiliki peran Pasien)
-     */
+    protected $dates = [
+        'tanggal_berobat',
+    ];
+
+    protected $casts = [
+        'tanggal_berobat' => 'date',
+    ];
+
     public function pasien()
     {
         return $this->belongsTo(User::class, 'pasien_id');
     }
 
-    /**
-     * Relasi dengan model Dokter (users yang memiliki peran Dokter)
-     */
     public function dokter()
     {
         return $this->belongsTo(User::class, 'dokter_id');
     }
 
-    /**
-     * Relasi dengan model Obat
-     */
     public function obats()
     {
-        return $this->belongsToMany(Obat::class, 'rekam_medis_obat', 'rekam_medis_id', 'obat_id');
+        return $this->belongsToMany(Obat::class, 'rekam_medis_obat', 'rekam_medis_id', 'obat_id')
+                    ->withPivot('jumlah');
     }
 }

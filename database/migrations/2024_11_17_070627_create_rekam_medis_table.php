@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pasien_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('dokter_id')->constrained('users')->onDelete('cascade');
+            $table->text('penyakit'); 
             $table->text('tindakan');
-            $table->date('tanggal_berobat');
+            $table->dateTime('tanggal_berobat');
             $table->timestamps();
         });
     }

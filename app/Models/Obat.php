@@ -13,20 +13,18 @@ class Obat extends Model
     protected $table = 'obat';
 
     protected $fillable = [
-        'nama_obat', 'deskripsi', 'tipe_obat', 'stok', 'gambar_obat', 'kedaluwarsa', 'status_kedaluwarsa',
+        'nama_obat',
+        'deskripsi',
+        'tipe_obat',
+        'stok',
+        'gambar_obat',
+        'kedaluwarsa',
+        'status_kedaluwarsa',
     ];
-
-    /**
-     * Menentukan status kedaluwarsa obat
-     */
-    public function updateStatusKedaluwarsa()
+    
+    public function getStatusKedaluwarsaAttribute()
     {
-        if (Carbon::now()->gt(Carbon::parse($this->kedaluwarsa))) {
-            $this->status_kedaluwarsa = 'kedaluwarsa';
-        } else {
-            $this->status_kedaluwarsa = 'belum kedaluwarsa';
-        }
-        $this->save();
+        return Carbon::now()->gt(Carbon::parse($this->kedaluwarsa)) ? 'kedaluwarsa' : 'belum kedaluwarsa';
     }
 
     /**

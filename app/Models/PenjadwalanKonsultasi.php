@@ -14,33 +14,17 @@ class PenjadwalanKonsultasi extends Model
     protected $fillable = [
         'id_pasien',
         'id_dokter',
-        'tanggal_konsultasi',
         'konfirmasi',
+        'tanggal_konsultasi'
     ];
 
-    /**
-     * Relasi dengan model Pasien
-     */
     public function pasien()
     {
         return $this->belongsTo(User::class, 'id_pasien');
     }
 
-    /**
-     * Relasi dengan model Dokter
-     */
     public function dokter()
     {
         return $this->belongsTo(User::class, 'id_dokter');
-    }
-
-    public function isDokter()
-    {
-        return $this->dokter()->exists();
-    }
-
-    public function isPasien()
-    {
-        return $this->pasien()->exists();
     }
 }

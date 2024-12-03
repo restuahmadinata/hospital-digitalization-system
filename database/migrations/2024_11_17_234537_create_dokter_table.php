@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('dokter', function (Blueprint $table) {
             $table->id();
             $table->foreignId('dokter_id')->constrained('users')->onDelete('cascade');
-            $table->enum('jenis_dokter', ['umum', 'spesialis']);
+            $table->enum('jenis_dokter', ['umum', 'spesialis'])->default('umum');
             $table->string('spesialisasi')->nullable();
             $table->timestamps();
         });

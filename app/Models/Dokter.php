@@ -19,6 +19,11 @@ class Dokter extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'dokter_id');
+    }
+
+    public function jadwalTugas()
+    {
+        return $this->hasMany(JadwalTugas::class, 'dokter_id');
     }
 }
