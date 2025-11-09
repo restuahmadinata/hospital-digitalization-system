@@ -1,4 +1,4 @@
-<p align="left"><img src="public/images/logo-rs.png" alt="Logo" style="max-width:100px; height:auto;"></p>
+![Logo](public/images/logo-rs-100.png)
 
 # MySehat
 
@@ -78,14 +78,22 @@ The application features three main user roles with tailored functionalities for
 
 
 -----
-
 ## 🛠️ Tech Stack
 
-  * **Backend:** PHP 8.2, Laravel 11
-  * **Frontend:** Tailwind CSS, Blade, Vite.js
-  * **Database:** MySQL
-  * **Authentication:** Laravel Breeze (Auth Scaffolding)
-  * **Architecture:** Model-View-Controller (MVC)
+Backend  
+[![PHP 8.2](https://img.shields.io/badge/PHP-8.2-777bb4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/) [![Laravel 11](https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com/)
+
+Frontend  
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Blade Templates](https://img.shields.io/badge/Blade-Templates-111827?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com/docs/blade) [![Vite](https://img.shields.io/badge/Vite-4.x-646cff?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+
+Database  
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+
+Authentication  
+[![Laravel Breeze](https://img.shields.io/badge/Laravel_Breeze-Auth-F0506E?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com/docs/starter-kits#laravel-breeze)
+
+Architecture  
+[![Architecture MVC](https://img.shields.io/badge/Architecture-MVC-0EA5A4?style=for-the-badge)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
 -----
 
